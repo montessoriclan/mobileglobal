@@ -9,8 +9,7 @@ in this project i try to connect the user with firebaseAuth , crud a document fo
 # requirement 
     android sdk min 19 and compile sdk version 33
 # Getting Started
-add these dependencies :)
-  
+    add these dependencies :)
   timezone: ^0.8.0 for timezone in notification
   rxdart: ^0.27.5   for reactive dart 
   firebase_core: ^2.1.1   firebase core to link with firebase
