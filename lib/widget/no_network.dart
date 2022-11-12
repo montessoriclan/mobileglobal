@@ -18,7 +18,7 @@ class NoNetwork extends StatelessWidget {
             : Center(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Icon(Icons.wifi_off_sharp),
                       KHeight(height: 30),
                       Text("please check your connection")

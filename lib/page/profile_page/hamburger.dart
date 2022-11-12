@@ -1,34 +1,38 @@
-import 'package:deernier/page/profile_page/ParentProfile.dart';
+import '../auth_page/login.dart';
+import '../auth_page/profil.dart';
+import 'ParentProfile.dart';
 import 'package:flutter/material.dart';
 
 import 'TeacherProfile.dart';
 import 'VolunteerProfile.dart';
 
-class hamburger extends StatelessWidget {
-  const hamburger({super.key});
+class Hamburger extends StatelessWidget {
+  const Hamburger({Key? key}) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
-            child: Text('Menu'),
+          const DrawerHeader(
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
+            child: Text('Menu'),
           ),
           ListTile(
-            title: Text('Teacher Profile'),
+            title: const Text('Teacher Profile'),
             onTap: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TeacherProfile()),
-              );
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const TeacherProfileView(),
+                  ));
             },
           ),
           ListTile(
-            title: Text('Parent Profile'),
+            title: const Text('Parent Profile'),
             onTap: () {
               Navigator.push(
                   context,
@@ -38,12 +42,33 @@ class hamburger extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('Volunteer Profile'),
+            title: const Text('Volunteer Profile'),
             onTap: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => VolunteerProfile()),
-              );
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const VolunteerProfileView(),
+                  ));
+            },
+          ),
+          ListTile(
+            title: const Text('Login'),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginView(),
+                  ));
+            },
+          ),
+          ListTile(
+            title: const Text('Welcome Page'),
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Profil(),
+                  ));
             },
           ),
         ],
@@ -51,50 +76,3 @@ class hamburger extends StatelessWidget {
     );
   }
 }
-//   @override
-//   Widget build(BuildContext context) {
-//     home:
-//     Scaffold(
-//       drawer: Drawer(
-//         child: ListView(
-//           padding: EdgeInsets.zero,
-//           children: <Widget>[
-//             DrawerHeader(
-//               decoration: BoxDecoration(
-//                 color: Colors.blue,
-//               ),
-//               child: Text('UIA HACKATHON'),
-//             ),
-//             ListTile(
-//               title: Text('Teacher profile'),
-//               onTap: () {
-//                 Navigator.push(
-//                   context,
-//                   MaterialPageRoute(builder: (context) => TeacherProfile()),
-//                 );
-//               },
-//             ),
-//             ListTile(
-//               title: Text('Volunteer profile'),
-//               onTap: () {
-//                 Navigator.push(
-//                   context,
-//                   MaterialPageRoute(builder: (context) => VolunteerProfile()),
-//                 );
-//               },
-//             ),
-//             ListTile(
-//               title: Text('Parent profile'),
-//               onTap: () {
-//                 Navigator.push(
-//                   context,
-//                   MaterialPageRoute(builder: (context) => ParentProfile()),
-//                 );
-//               },
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'TeacherProfile.dart';
-import 'hamburger.dart';
+import 'Hamburger.dart';
 
-class VolunteerProfile extends StatelessWidget {
-  const VolunteerProfile({super.key});
+class VolunteerProfileView extends StatefulWidget {
+  const VolunteerProfileView({Key? key}) : super(key: key);
 
+  @override
+  State<VolunteerProfileView> createState() => _VolunteerProfileState();
+}
+
+class _VolunteerProfileState extends State<VolunteerProfileView> {
   @override
   Widget build(BuildContext context) {
     const appTitle = 'Volunteer profile';
@@ -15,15 +20,15 @@ class VolunteerProfile extends StatelessWidget {
         appBar: AppBar(
           title: const Text(appTitle),
         ),
-        body: MyCustomForm(),
-        drawer: hamburger(),
+        body: const MyCustomForm(),
+        drawer: const Hamburger(),
       ),
     );
   }
 }
 
 class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({super.key});
+  const MyCustomForm({Key? key}) : super(key: key);
 
   @override
   State<MyCustomForm> createState() => _MyCustomFormState();
@@ -109,18 +114,16 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
           ),
         ),
-        Container(
-          child: ElevatedButton(
-            child: Text(
-              'Upload your certificate',
-              style: TextStyle(fontSize: 20.0),
-            ),
-            onPressed: () {},
+        ElevatedButton(
+          child: const Text(
+            'Upload your certificate',
+            style: TextStyle(fontSize: 20.0),
           ),
+          onPressed: () {},
         ),
         Container(
           child: ElevatedButton(
-            child: Text(
+            child: const Text(
               'Submit',
               style: TextStyle(fontSize: 20.0),
             ),
