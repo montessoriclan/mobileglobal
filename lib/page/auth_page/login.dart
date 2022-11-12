@@ -9,6 +9,7 @@ import 'package:deernier/widget/k_form_field.dart';
 import 'package:deernier/widget/k_height.dart';
 import 'package:deernier/widget/k_password_field.dart';
 import 'package:deernier/widget/k_text.dart';
+import 'package:deernier/widget/no_network.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -60,55 +61,57 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 25),
-          child: Column(children: <Widget>[
-            Row(
-              children: const <Widget>[
-                KText(
-                    text: "login",
-                    size: AppConstant.leadingText,
-                    weight: FontWeight.bold),
-              ],
-            ),
-            const KHeight(height: 20),
-            Row(
-              children: const <Widget>[
-                KText(
-                    text: "login to access on your account",
-                    size: AppConstant.titleText,
-                    weight: FontWeight.w500),
-              ],
-            ),
-            const KHeight(height: 40),
-            KFormField(
-                controller: textEmailController,
-                hint: "Enter your email",
-                type: TextInputType.emailAddress),
-            const KHeight(height: 10),
-            KPasswordField(
-                text: "password",
-                type: TextInputType.text,
-                textcontroler: textPasswordController),
-            const KHeight(height: 20),
-            KButtonPrimary(text: "Login", function: login),
-            const KHeight(height: 10),
-            Column(
-              children: const [Text("or")],
-            ),
-            const KHeight(height: 10),
-            KButtonPrimary(
-                text: "create a new account",
-                function: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const RegisterView(),
-                    ))),
-          ]),
-        ),
-      )),
+      body: NoNetwork(
+        child: SafeArea(
+            child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 25),
+            child: Column(children: <Widget>[
+              Row(
+                children: const <Widget>[
+                  KText(
+                      text: "login",
+                      size: AppConstant.leadingText,
+                      weight: FontWeight.bold),
+                ],
+              ),
+              const KHeight(height: 20),
+              Row(
+                children: const <Widget>[
+                  KText(
+                      text: "login to access on your account",
+                      size: AppConstant.titleText,
+                      weight: FontWeight.w500),
+                ],
+              ),
+              const KHeight(height: 40),
+              KFormField(
+                  controller: textEmailController,
+                  hint: "Enter your email",
+                  type: TextInputType.emailAddress),
+              const KHeight(height: 10),
+              KPasswordField(
+                  text: "password",
+                  type: TextInputType.text,
+                  textcontroler: textPasswordController),
+              const KHeight(height: 20),
+              KButtonPrimary(text: "Login", function: login),
+              const KHeight(height: 10),
+              Column(
+                children: const [Text("or")],
+              ),
+              const KHeight(height: 10),
+              KButtonPrimary(
+                  text: "create a new account",
+                  function: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterView(),
+                      ))),
+            ]),
+          ),
+        )),
+      ),
     );
   }
 }

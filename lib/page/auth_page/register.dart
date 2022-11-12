@@ -6,6 +6,7 @@ import 'package:deernier/widget/k_button_primary.dart';
 import 'package:deernier/widget/k_form_field.dart';
 import 'package:deernier/widget/k_password_field.dart';
 import 'package:deernier/widget/k_text.dart';
+import 'package:deernier/widget/no_network.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -61,91 +62,93 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 25),
-          child: Column(children: <Widget>[
-            Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    Row(
-                      children: const <Widget>[
-                        KText(
-                            text: "Create account",
-                            size: AppConstant.leadingText,
-                            weight: FontWeight.bold),
-                      ],
-                    ),
-                    const KHeight(height: 20),
-                    Row(
-                      children: const <Widget>[
-                        KText(
-                            text:
-                                "create your account to access in your profil",
-                            size: AppConstant.titleText,
-                            weight: FontWeight.w500),
-                      ],
-                    ),
-                    const KHeight(height: 40),
-                    KFormField(
-                      validator: (value){
-                        if (value!.isEmpty) {
-                          return "please enter an email addresse";
-                        }
-                         return null;
-
-                      },
-                        controller: textEmailController,
-                        hint: "Enter your email",
-                        type: TextInputType.emailAddress),
-                    const KHeight(height: 10),
-                    KPasswordField(
-                      validator: (value) {
+      body: NoNetwork(
+        child: SafeArea(
+            child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 25),
+            child: Column(children: <Widget>[
+              Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: const <Widget>[
+                          KText(
+                              text: "Create account",
+                              size: AppConstant.leadingText,
+                              weight: FontWeight.bold),
+                        ],
+                      ),
+                      const KHeight(height: 20),
+                      Row(
+                        children: const <Widget>[
+                          KText(
+                              text:
+                                  "create your account to access in your profil",
+                              size: AppConstant.titleText,
+                              weight: FontWeight.w500),
+                        ],
+                      ),
+                      const KHeight(height: 40),
+                      KFormField(
+                        validator: (value){
                           if (value!.isEmpty) {
-                            return "please enter a password";
+                            return "please enter an email addresse";
                           }
-                          return null;
-                      },
-                        text: "password",
-                        type: TextInputType.text,
-                        textcontroler: textPasswordController),
-                    const KHeight(height: 10),
-                    KPasswordField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "please enter a password";
-                          }
-                         
                            return null;
-                      },
-                        text: "password confirmation",
-                        type: TextInputType.text,
-                        textcontroler: textPasswordController),
-                    const KHeight(height: 20),
-                    KButtonPrimary(text: "Register", function: (){
-                      if (formKey.currentState!.validate()) {
-                        register();
-                      }
-                    }),
-                  ],
-                )),
-            const KHeight(height: 10),
-            Column(
-              children: const [Text("or")],
-            ),
-            const KHeight(height: 10),
-            KButtonPrimary(
-                text: "log in to your account",
-                function: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginView(),
-                    ))),
-          ]),
-        ),
-      )),
+      
+                        },
+                          controller: textEmailController,
+                          hint: "Enter your email",
+                          type: TextInputType.emailAddress),
+                      const KHeight(height: 10),
+                      KPasswordField(
+                        validator: (value) {
+                            if (value!.isEmpty) {
+                              return "please enter a password";
+                            }
+                            return null;
+                        },
+                          text: "password",
+                          type: TextInputType.text,
+                          textcontroler: textPasswordController),
+                      const KHeight(height: 10),
+                      KPasswordField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "please enter a password";
+                            }
+                           
+                             return null;
+                        },
+                          text: "password confirmation",
+                          type: TextInputType.text,
+                          textcontroler: textPasswordController),
+                      const KHeight(height: 20),
+                      KButtonPrimary(text: "Register", function: (){
+                        if (formKey.currentState!.validate()) {
+                          register();
+                        }
+                      }),
+                    ],
+                  )),
+              const KHeight(height: 10),
+              Column(
+                children: const [Text("or")],
+              ),
+              const KHeight(height: 10),
+              KButtonPrimary(
+                  text: "log in to your account",
+                  function: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginView(),
+                      ))),
+            ]),
+          ),
+        )),
+      ),
     );
   }
 }
