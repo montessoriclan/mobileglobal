@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class KText extends StatelessWidget {
   final String text;
   final FontWeight? weight;
@@ -14,10 +13,9 @@ class KText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Text(text,
-    style: TextStyle(
-      fontSize:size ,
-      fontWeight:weight ),
+    return Text(
+      text,
+      style: TextStyle(fontSize: size, fontWeight: weight),
     );
   }
 }

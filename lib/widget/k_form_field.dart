@@ -6,23 +6,23 @@ class KFormField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? type;
   final String? Function(String?)? validator;
-   const KFormField({
+  const KFormField({
     this.hint,
     this.controller,
     this.type,
     this.sufixIcon,
-      this.validator,
+    this.validator,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-    keyboardType: type,
+      keyboardType: type,
       controller: controller,
       decoration: InputDecoration(
         hintText: hint,
-        suffixIcon: Icon(sufixIcon)  ,
+        suffixIcon: Icon(sufixIcon),
         labelText: hint,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
