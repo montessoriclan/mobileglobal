@@ -26,38 +26,35 @@ class _LoginViewState extends State<LoginView> {
   bool? isLoading = false;
 
   Future<void> login() async {
-     showDialog(
-      barrierDismissible: false,
-      context: context, builder: (conext)=>
-      AlertDialog(
-        
-      title: Column(children: const <Widget> [
-        Text("please wait ..."),
-        KHeight(height: 10),
-        LinearProgressIndicator(),
-      ]),
-    ));
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (conext) => AlertDialog(
+              title: Column(children: const <Widget>[
+                Text("please wait ..."),
+                KHeight(height: 10),
+                LinearProgressIndicator(),
+              ]),
+            ));
     try {
       await AuthService().signInWithEmailAndPassword(LoginModel(
           email: textEmailController.text,
           password: textPasswordController.text));
-            navigatorKey.currentState!.popUntil((route)=>route.isFirst);
-          // ignore: use_build_context_synchronously
-          Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Profil(),
-                    ));
+      navigatorKey.currentState!.popUntil((route) => route.isFirst);
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Profil(),
+          ));
     } on FirebaseAuthException catch (e) {
-       
       setState(() {
         errorMessage = e.message;
       });
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(errorMessage.toString())));
     }
-     navigatorKey.currentState!.popUntil((route)=>route.isFirst);
-    
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
   @override
@@ -69,17 +66,23 @@ class _LoginViewState extends State<LoginView> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 25),
           child: Column(children: <Widget>[
             Row(
-              children: const <Widget> [
-                 KText(text: "login",size: AppConstant.leadingText,weight: FontWeight.bold),
+              children: const <Widget>[
+                KText(
+                    text: "login",
+                    size: AppConstant.leadingText,
+                    weight: FontWeight.bold),
               ],
             ),
             const KHeight(height: 20),
-             Row(
-              children: const <Widget> [
-                 KText(text: "login to access on your account",size: AppConstant.titleText,weight: FontWeight.w500),
+            Row(
+              children: const <Widget>[
+                KText(
+                    text: "login to access on your account",
+                    size: AppConstant.titleText,
+                    weight: FontWeight.w500),
               ],
             ),
-                const KHeight(height: 40),
+            const KHeight(height: 40),
             KFormField(
                 controller: textEmailController,
                 hint: "Enter your email",
@@ -93,7 +96,7 @@ class _LoginViewState extends State<LoginView> {
             KButtonPrimary(text: "Login", function: login),
             const KHeight(height: 10),
             Column(
-              children: const [ Text("or")],
+              children: const [Text("or")],
             ),
             const KHeight(height: 10),
             KButtonPrimary(
