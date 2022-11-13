@@ -20,21 +20,21 @@ class _VolunteerProfileState extends State<VolunteerProfileView> {
         appBar: AppBar(
           title: const Text(appTitle),
         ),
-        body: const MyCustomForm(),
+        body: const VolunteerProfileForm(),
         drawer: const Hamburger(),
       ),
     );
   }
 }
 
-class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({Key? key}) : super(key: key);
+class VolunteerProfileForm extends StatefulWidget {
+  const VolunteerProfileForm({Key? key}) : super(key: key);
 
   @override
-  State<MyCustomForm> createState() => _MyCustomFormState();
+  State<VolunteerProfileForm> createState() => _VolunteerProfileFormState();
 }
 
-class _MyCustomFormState extends State<MyCustomForm> {
+class _VolunteerProfileFormState extends State<VolunteerProfileForm> {
   final nameController = TextEditingController();
   final genderController = TextEditingController();
   final schoolController = TextEditingController();
