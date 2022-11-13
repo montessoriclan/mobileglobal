@@ -48,9 +48,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
     super.dispose();
   }
 
+  String genderValue = 'Male';
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return SingleChildScrollView(
+        child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
@@ -65,12 +67,22 @@ class _MyCustomFormState extends State<MyCustomForm> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: TextFormField(
-            controller: genderController,
-            decoration: const InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Gender',
-            ),
+          child: DropdownButton<String>(
+            value: genderValue,
+            items: <String>['Male', 'Female']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(
+                  value,
+                ),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              setState(() {
+                genderValue = newValue!;
+              });
+            },
           ),
         ),
         Padding(
@@ -137,6 +149,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
           ),
         ),
       ],
-    );
+    ));
   }
 }

@@ -13,7 +13,7 @@ class ParentProfileView extends StatefulWidget {
 class _ParentProfileState extends State<ParentProfileView> {
   @override
   Widget build(BuildContext context) {
-    const appTitle = 'Teacher profile';
+    const appTitle = 'Parent profile';
     return MaterialApp(
       title: appTitle,
       home: Scaffold(
@@ -49,9 +49,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
     super.dispose();
   }
 
+  String genderValue = 'Male';
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return SingleChildScrollView(
+        child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
@@ -66,12 +68,22 @@ class _MyCustomFormState extends State<MyCustomForm> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          child: TextFormField(
-            controller: genderController,
-            decoration: const InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Gender',
-            ),
+          child: DropdownButton<String>(
+            value: genderValue,
+            items: <String>['Male', 'Female']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(
+                  value,
+                ),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              setState(() {
+                genderValue = newValue!;
+              });
+            },
           ),
         ),
         Padding(
@@ -129,7 +141,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
             onPressed: () {
               print(nameController.text);
-              print(genderController.text);
+              print(genderValue);
               print(schoolController.text);
               print(locationController.text);
               print(specialisationController.text);
@@ -138,6 +150,6 @@ class _MyCustomFormState extends State<MyCustomForm> {
           ),
         ),
       ],
-    );
+    ));
   }
 }
