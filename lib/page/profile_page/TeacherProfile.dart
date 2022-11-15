@@ -25,21 +25,21 @@ class _TeacherProfileState extends State<TeacherProfileView> {
         appBar: AppBar(
           title: const Text(appTitle),
         ),
-        body: const MyCustomForm(),
+        body: const TeacherProfileForm(),
         drawer: const Hamburger(),
       ),
     );
   }
 }
 
-class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({Key? key}) : super(key: key);
+class TeacherProfileForm extends StatefulWidget {
+  const TeacherProfileForm({Key? key}) : super(key: key);
 
   @override
-  State<MyCustomForm> createState() => _MyCustomFormState();
+  State<TeacherProfileForm> createState() => _TeacherProfileFormState();
 }
 
-class _MyCustomFormState extends State<MyCustomForm> {
+class _TeacherProfileFormState extends State<TeacherProfileForm> {
   final nameController = TextEditingController();
   final genderController = TextEditingController();
   final schoolController = TextEditingController();

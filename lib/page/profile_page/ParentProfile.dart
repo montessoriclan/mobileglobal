@@ -26,21 +26,21 @@ class _ParentProfileState extends State<ParentProfileView> {
         appBar: AppBar(
           title: const Text(appTitle),
         ),
-        body: const MyCustomForm(),
+        body: const ParentProfileForm(),
         drawer: const Hamburger(),
       ),
     );
   }
 }
 
-class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({Key? key}) : super(key: key);
+class ParentProfileForm extends StatefulWidget {
+  const ParentProfileForm({Key? key}) : super(key: key);
 
   @override
-  State<MyCustomForm> createState() => _MyCustomFormState();
+  State<ParentProfileForm> createState() => _ParentProfileFormState();
 }
 
-class _MyCustomFormState extends State<MyCustomForm> {
+class _ParentProfileFormState extends State<ParentProfileForm> {
   final nameController = TextEditingController();
   final genderController = TextEditingController();
   final schoolController = TextEditingController();
