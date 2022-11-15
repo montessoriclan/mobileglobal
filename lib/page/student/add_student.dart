@@ -1,4 +1,4 @@
-import 'package:deernier/helper/firebase_helper.dart';
+import 'package:deernier/helper/student_helper.dart';
 import 'package:deernier/model/student_model.dart';
 import 'package:deernier/widget/k_form_field.dart';
 import 'package:deernier/widget/k_height.dart';
@@ -44,7 +44,7 @@ class _AddStudentState extends State<AddStudent> {
               ),
               ElevatedButton(
                   onPressed: () {
-                    FirebaseHelper.create(StudentModel(
+                    StudentHelper.create(StudentModel(
                         firstname: contFirstname.text,
                         lastname: contLastname.text,
                         location: contLocation.text));

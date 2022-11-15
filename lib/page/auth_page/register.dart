@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:deernier/model/register_model.dart';
 import 'package:deernier/page/auth_page/login.dart';
 import 'package:deernier/service/auth_firebase_service.dart';
+import 'package:deernier/service/enum/user_type_enum.dart';
+import 'package:deernier/helper/user_profile_helper.dart';
 import 'package:deernier/util/app_constant.dart';
 import 'package:deernier/widget/k_button_primary.dart';
 import 'package:deernier/widget/k_form_field.dart';
@@ -26,23 +30,37 @@ class _RegisterViewState extends State<RegisterView> {
   bool? isLoading = false;
   String? errorMessage = '';
   final formKey = GlobalKey<FormState>();
+  String userTypeString = "teacher";
 
   Future<void> register() async {
-     showDialog(
-      barrierDismissible: false,
-      context: context, builder: (conext)=>
-      AlertDialog(
-        
-      title: Column(children: const <Widget> [
-        Text("please wait ..."),
-        KHeight(height: 10),
-        LinearProgressIndicator(),
-      ]),
-    ));
+    //TODO: Add Validation Before Register
+
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (conext) => AlertDialog(
+              title: Column(children: const <Widget>[
+                Text("please wait ..."),
+                KHeight(height: 10),
+                LinearProgressIndicator(),
+              ]),
+            ));
     try {
-      await AuthService().signUpWithEmailAndPassword(RegisterModel(
-          email: textEmailController.text,
-          password: textPasswordController.text));
+      // await AuthService().signUpWithEmailAndPassword(RegisterModel(
+      //     email: textEmailController.text,
+      //     password: textPasswordController.text));
+
+      // Creating User in Firestore
+
+      // UserType userType = UserType.values
+      //     .firstWhere((element) => element.toString() == userTypeString);
+
+      log(userTypeString);
+      log(UserType.values.toString());
+
+      await UserProfileHelper()
+          .registerUser(textEmailController.text, userTypeString);
+
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
           context,
@@ -55,8 +73,14 @@ class _RegisterViewState extends State<RegisterView> {
       });
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(errorMessage.toString())));
+    } on FirebaseException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(errorMessage.toString())));
     }
-    navigatorKey.currentState!.popUntil((route)=>route.isFirst);
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
   @override
@@ -92,24 +116,41 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                       const KHeight(height: 40),
                       KFormField(
-                        validator: (value){
-                          if (value!.isEmpty) {
-                            return "please enter an email addresse";
-                          }
-                           return null;
-      
-                        },
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "please enter an email addresse";
+                            }
+                            return null;
+                          },
                           controller: textEmailController,
                           hint: "Enter your email",
                           type: TextInputType.emailAddress),
                       const KHeight(height: 10),
+                      DropdownButton<String>(
+                        value: userTypeString,
+                        items: <String>["teacher", "parent", "volunteer"]
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            userTypeString = newValue!;
+                          });
+                        },
+                      ),
+                      const KHeight(height: 10),
                       KPasswordField(
-                        validator: (value) {
+                          validator: (value) {
                             if (value!.isEmpty) {
                               return "please enter a password";
                             }
                             return null;
-                        },
+                          },
                           text: "password",
                           type: TextInputType.text,
                           textcontroler: textPasswordController),
@@ -119,18 +160,20 @@ class _RegisterViewState extends State<RegisterView> {
                             if (value!.isEmpty) {
                               return "please enter a password";
                             }
-                           
-                             return null;
-                        },
+
+                            return null;
+                          },
                           text: "password confirmation",
                           type: TextInputType.text,
                           textcontroler: textPasswordController),
                       const KHeight(height: 20),
-                      KButtonPrimary(text: "Register", function: (){
-                        if (formKey.currentState!.validate()) {
-                          register();
-                        }
-                      }),
+                      KButtonPrimary(
+                          text: "Register",
+                          function: () {
+                            if (formKey.currentState!.validate()) {
+                              register();
+                            }
+                          }),
                     ],
                   )),
               const KHeight(height: 10),

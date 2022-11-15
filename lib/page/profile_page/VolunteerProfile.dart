@@ -1,3 +1,9 @@
+import 'dart:developer';
+
+import 'package:deernier/model/user_profile_model.dart';
+import 'package:deernier/service/auth_firebase_service.dart';
+import 'package:deernier/helper/user_profile_helper.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'TeacherProfile.dart';
@@ -46,7 +52,38 @@ class _MyCustomFormState extends State<MyCustomForm> {
   void dispose() {
     // Clean up the controller when the widget is disposed.
     nameController.dispose();
+    genderController.dispose();
+    schoolController.dispose();
+    locationController.dispose();
+    specialisationController.dispose();
+    experienceController.dispose();
     super.dispose();
+  }
+
+  void profileSubmitHandler() async {
+    try {
+      String email = AuthService().getCurrentUser?.email ?? "no email";
+      if (email == "no email") {
+        log("no email");
+        return;
+      }
+
+      UserProfileModel userProfileModel = UserProfileModel(
+          email,
+          nameController.text,
+          genderValue,
+          schoolController.text,
+          locationController.text,
+          locationController.text,
+          specialisationController.text,
+          experienceController.text,"Certificate URL");
+
+      await UserProfileHelper().addProfile(userProfileModel);
+      log({"message": "profile added"}.toString());
+    } on FirebaseException catch (e) {
+      log(e.toString());
+      // Do something
+    }
   }
 
   String genderValue = 'Male';
@@ -133,20 +170,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
           ),
           onPressed: () {},
         ),
-        Container(
-          child: ElevatedButton(
-            child: const Text(
-              'Submit',
-              style: TextStyle(fontSize: 20.0),
-            ),
-            onPressed: () {
-              print(nameController.text);
-              print(genderController.text);
-              print(schoolController.text);
-              print(locationController.text);
-              print(specialisationController.text);
-              print(experienceController.text);
-            },
+        ElevatedButton(
+          onPressed: profileSubmitHandler,
+          child: const Text(
+            'Submit',
+            style: TextStyle(fontSize: 20.0),
           ),
         ),
       ],

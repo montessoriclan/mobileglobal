@@ -1,4 +1,4 @@
-import 'package:deernier/helper/firebase_helper.dart';
+import 'package:deernier/helper/student_helper.dart';
 import 'package:deernier/model/student_model.dart';
 import 'package:deernier/page/student/add_student.dart';
 import 'package:deernier/util/app_constant.dart';
@@ -25,7 +25,7 @@ class _SimpleCrudState extends State<SimpleCrud> {
         elevation: 0,
       ),
       body: StreamBuilder<List<StudentModel>>(
-        stream: FirebaseHelper.read(),
+        stream: StudentHelper.read(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Center(
@@ -82,7 +82,7 @@ class _SimpleCrudState extends State<SimpleCrud> {
                                                         text: e.location)),
                                             ElevatedButton(
                                                 onPressed: () {
-                                                  FirebaseHelper.update(
+                                                  StudentHelper.update(
                                                       StudentModel(
                                                           firstname:
                                                               contFirstname
@@ -101,7 +101,7 @@ class _SimpleCrudState extends State<SimpleCrud> {
                               );
                             },
                             onLongPress: () {
-                              FirebaseHelper.delete(StudentModel(id: e.id));
+                              StudentHelper.delete(StudentModel(id: e.id));
                             },
                             title: Text(e.lastname.toString()),
                             subtitle: Text(e.firstname.toString()),

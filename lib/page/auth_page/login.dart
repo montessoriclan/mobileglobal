@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:deernier/main.dart';
 import 'package:deernier/model/login_model.dart';
 import 'package:deernier/page/auth_page/profil.dart';
@@ -42,6 +45,8 @@ class _LoginViewState extends State<LoginView> {
           email: textEmailController.text,
           password: textPasswordController.text));
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
+
+      
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
           context,
@@ -70,7 +75,7 @@ class _LoginViewState extends State<LoginView> {
               Row(
                 children: const <Widget>[
                   KText(
-                      text: "login",
+                      text: "Login",
                       size: AppConstant.leadingText,
                       weight: FontWeight.bold),
                 ],

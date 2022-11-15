@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:deernier/model/student_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
-class FirebaseHelper {
+class StudentHelper {
+
+  static final _email = FirebaseAuth.instance.currentUser!.email;
 
   //request create
   static Future create(StudentModel user) async {
@@ -14,7 +17,7 @@ class FirebaseHelper {
     final docRef = userCollection.doc(uid);
 
     final newUser =
-        StudentModel(id: uid, lastname: user.lastname, firstname: user.firstname,location: user.location).toJson();
+        StudentModel(id: uid, lastname: user.lastname, firstname: user.firstname,location: user.location,tutorID: StudentHelper._email).toJson();
 
     try {
       await docRef.set(newUser);
@@ -26,7 +29,7 @@ class FirebaseHelper {
   }
 // read
   static Stream<List<StudentModel>> read() {
-    final userCollection = FirebaseFirestore.instance.collection("student");
+    final userCollection = FirebaseFirestore.instance.collection("student").where('tutorID',isEqualTo: StudentHelper._email);
     return userCollection.snapshots().map((querySnapshot) =>
         querySnapshot.docs.map((e) => StudentModel.fromSnapshot(e)).toList());
   }

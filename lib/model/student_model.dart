@@ -4,12 +4,14 @@ class StudentModel{
   final String? lastname;
   final String? firstname;
   final String? location;
+  final String? tutorID;
 
   StudentModel({
     this.id,
     this.lastname,
     this.firstname,
-    this.location
+    this.location,
+    this.tutorID,
   });
 
   factory StudentModel.fromSnapshot(DocumentSnapshot snap){
@@ -19,7 +21,7 @@ class StudentModel{
         lastname: snapshot['lastname'],
         firstname: snapshot['firstname'],
         location: snapshot['location'],
-   
+        tutorID: snapshot['tutorID'],
       );
   }
 
@@ -27,6 +29,7 @@ class StudentModel{
     "id":id,
     "lastname":lastname,
     "firstname":firstname,
-    "location":location
+    "location":location,
+    "tutorID":tutorID,
   };
 }
