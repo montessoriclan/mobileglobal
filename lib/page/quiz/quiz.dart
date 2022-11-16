@@ -1,4 +1,5 @@
 import 'package:deernier/data/question_list.dart';
+import 'package:deernier/page/quiz/score.dart';
 import 'package:flutter/material.dart';
 
 class Quiz extends StatefulWidget {
@@ -101,11 +102,24 @@ class _QuizState extends State<Quiz> {
                 children: [
                   GestureDetector(
                       onTap: isPressed
-                          ? () {
-                              _controller.nextPage(
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.linear);
-                            }
+                          ? index + 1 == questions.length
+                              ? () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            Score(score: score),
+                                      ));
+                                }
+                              : () {
+                                  _controller.nextPage(
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      curve: Curves.linear);
+                                  setState(() {
+                                    isPressed = false;
+                                  });
+                                }
                           : null,
                       child: Text(index + 1 == questions.length
                           ? "voir le resultat"
