@@ -5,9 +5,10 @@ import 'package:deernier/model/user_profile_model.dart';
 import 'package:deernier/service/auth_firebase_service.dart';
 import 'package:deernier/helper/user_profile_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'Hamburger.dart';
+import 'hamburger.dart';
 
 class ParentProfileView extends StatefulWidget {
   const ParentProfileView({Key? key}) : super(key: key);
@@ -172,21 +173,21 @@ class _ParentProfileFormState extends State<ParentProfileForm> {
           ),
           onPressed: () {},
         ),
-        Container(
-          child: ElevatedButton(
-            child: const Text(
-              'Submit',
-              style: TextStyle(fontSize: 20.0),
-            ),
-            onPressed: () {
-              print(nameController.text);
-              print(genderValue);
-              print(schoolController.text);
-              print(locationController.text);
-              print(specialisationController.text);
-              print(experienceController.text);
-            },
+        ElevatedButton(
+          child: const Text(
+            'Submit',
+            style: TextStyle(fontSize: 20.0),
           ),
+          onPressed: () {
+            if (kDebugMode) {
+              print(nameController.text);
+            }
+            print(genderValue);
+            print(schoolController.text);
+            print(locationController.text);
+            print(specialisationController.text);
+            print(experienceController.text);
+          },
         ),
       ],
     ));

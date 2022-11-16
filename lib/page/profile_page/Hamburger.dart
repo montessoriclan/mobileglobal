@@ -1,7 +1,5 @@
 import '../auth_page/login.dart';
 import '../auth_page/profil.dart';
-import '../student/student_progress.dart';
-import 'ParentProfile.dart';
 import 'package:flutter/material.dart';
 
 import 'TeacherProfile.dart';
@@ -13,7 +11,7 @@ class Hamburger extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(  
+      child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           const DrawerHeader(
@@ -38,7 +36,7 @@ class Hamburger extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ParentProfileView(),
+                    builder: (context) => const Hamburger(),
                   ));
             },
           ),
@@ -75,11 +73,11 @@ class Hamburger extends StatelessWidget {
           ListTile(
             title: const Text('Student Progress'),
             onTap: () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const StudentProgressView(),
-                  ));
+              // Navigator.pushReplacement(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => const StudentProgressView(),
+              //     ));
             },
           ),
         ],
