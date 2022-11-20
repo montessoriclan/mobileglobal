@@ -1,8 +1,6 @@
 import 'dart:developer';
 
-import 'package:deernier/model/register_model.dart';
 import 'package:deernier/page/auth_page/login.dart';
-import 'package:deernier/service/auth_firebase_service.dart';
 import 'package:deernier/service/enum/user_type_enum.dart';
 import 'package:deernier/helper/user_profile_helper.dart';
 import 'package:deernier/util/app_constant.dart';
@@ -33,7 +31,6 @@ class _RegisterViewState extends State<RegisterView> {
   String userTypeString = "teacher";
 
   Future<void> register() async {
-    //TODO: Add Validation Before Register
 
     showDialog(
         barrierDismissible: false,

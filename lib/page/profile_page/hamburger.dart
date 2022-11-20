@@ -1,11 +1,17 @@
+import 'package:deernier/page/profile_page/TeacherProfile.dart';
+import 'package:deernier/page/profile_page/VolunteerProfile.dart';
+
 import '../auth_page/login.dart';
 import '../auth_page/profil.dart';
-// import '../student/student_progress.dart';
-import 'ParentProfile.dart';
+// <<<<<<< HEAD
+// // import '../student/student_progress.dart';
+// import 'ParentProfile.dart';
+// =======
+// >>>>>>> 69854533955c5ef770692fa25601b6806c701c7b
 import 'package:flutter/material.dart';
 
-import 'TeacherProfile.dart';
-import 'VolunteerProfile.dart';
+// import 'TeacherProfile.dart';
+// import 'VolunteerProfile.dart';
 
 class Hamburger extends StatelessWidget {
   const Hamburger({Key? key}) : super(key: key);
@@ -13,7 +19,7 @@ class Hamburger extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(  
+      child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           const DrawerHeader(
@@ -38,7 +44,7 @@ class Hamburger extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ParentProfileView(),
+                    builder: (context) => const Hamburger(),
                   ));
             },
           ),

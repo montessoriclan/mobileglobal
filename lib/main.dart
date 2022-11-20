@@ -1,14 +1,12 @@
-import 'package:deernier/page/auth_page/login.dart';
-import 'package:deernier/page/auth_page/profil.dart';
+import 'package:deernier/page/quiz/quiz.dart';
 import 'package:deernier/service/network_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); 
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -24,7 +22,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    print("Hello");
+    
     return Builder(builder: (context) {
       return MultiProvider(
         providers: [
@@ -36,23 +34,24 @@ class _MyAppState extends State<MyApp> {
         child: MaterialApp(
           navigatorKey: navigatorKey,
           debugShowCheckedModeBanner: false,
-          home: StreamBuilder<User?>(
-              stream: FirebaseAuth.instance.authStateChanges(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: LinearProgressIndicator(),
-                  );
-                } else if (snapshot.hasError) {
-                  return const Center(
-                    child: Text("something where wrong"),
-                  );
-                } else if (snapshot.hasData) {
-                  return const Profil();
-                } else {
-                  return const LoginView();
-                }
-              }),
+          home: Quiz(),
+          // home: StreamBuilder<User?>(
+          //     stream: FirebaseAuth.instance.authStateChanges(),
+          //     builder: (context, snapshot) {
+          //       if (snapshot.connectionState == ConnectionState.waiting) {
+          //         return const Center(
+          //           child: LinearProgressIndicator(),
+          //         );
+          //       } else if (snapshot.hasError) {
+          //         return const Center(
+          //           child: Text("something where wrong"),
+          //         );
+          //       } else if (snapshot.hasData) {
+          //         return  Quiz();
+          //       } else {
+          //         return const LoginView();
+          //       }
+          //     }),
         ),
       );
     });

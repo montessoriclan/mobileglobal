@@ -6,7 +6,7 @@ import 'package:deernier/helper/user_profile_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'Hamburger.dart';
+import 'hamburger.dart';
 
 class TeacherProfileView extends StatefulWidget {
   const TeacherProfileView({Key? key}) : super(key: key);

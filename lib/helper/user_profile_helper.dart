@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:deernier/model/user_profile_model.dart';
-import 'package:deernier/service/enum/user_type_enum.dart';
 
 class UserProfileHelper {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
