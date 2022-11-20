@@ -6,6 +6,7 @@ import 'package:deernier/model/login_model.dart';
 import 'package:deernier/page/auth_page/profil.dart';
 import 'package:deernier/page/auth_page/register.dart';
 import 'package:deernier/service/auth_firebase_service.dart';
+import 'package:deernier/service/email_service.dart';
 import 'package:deernier/util/app_constant.dart';
 import 'package:deernier/widget/k_button_primary.dart';
 import 'package:deernier/widget/k_form_field.dart';
@@ -46,7 +47,6 @@ class _LoginViewState extends State<LoginView> {
           password: textPasswordController.text));
       navigatorKey.currentState!.popUntil((route) => route.isFirst);
 
-      
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
           context,
@@ -107,16 +107,27 @@ class _LoginViewState extends State<LoginView> {
               ),
               const KHeight(height: 10),
               KButtonPrimary(
-                  text: "create a new account",
-                  function: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const RegisterView(),
-                      ))),
+                text: "create a new account",
+                function: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RegisterView(),
+                  ),
+                ),
+              ),
+              KButtonPrimary(text: "Email",function: sendEmail,)
             ]),
           ),
         )),
       ),
     );
+  }
+
+  void sendEmail()async {
+    try {
+      await EmailService().send(body: "Body from Flutter App", subject: "Testing", recipients: ['abhisriram007@gmail.com'], attachmentPaths: []);
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }

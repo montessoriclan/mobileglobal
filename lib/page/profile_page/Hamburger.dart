@@ -1,6 +1,6 @@
 import '../auth_page/login.dart';
 import '../auth_page/profil.dart';
-import '../student/student_progress.dart';
+// import '../student/student_progress.dart';
 import 'ParentProfile.dart';
 import 'package:flutter/material.dart';
 
@@ -75,11 +75,11 @@ class Hamburger extends StatelessWidget {
           ListTile(
             title: const Text('Student Progress'),
             onTap: () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const StudentProgressView(),
-                  ));
+              // Navigator.pushReplacement(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => const StudentProgressView(),
+              //     ));
             },
           ),
         ],
